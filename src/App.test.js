@@ -1,8 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('buttons working', () => {
+  test('complete button exist', () => {
+    render(<App />);
+    const completeBtn = screen.getByText(/Complete/i);
+    expect(completeBtn).toBeInTheDocument();
+  });
+
+  test('delete button exist', () => {
+    render(<App/>);
+    const deleteBtn = screen.getAllByText(/Create/i);
+
+    expect(deleteBtn).toBeInTheDocument();
+  });
+  
+})
