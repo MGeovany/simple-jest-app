@@ -1,9 +1,9 @@
-import { createEvent, fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App, { TodoItems } from "./App";
 
-describe("APP function TODOITEMS", () => {
-  test("ejecuta complete", async () => {
+describe("Functions of the TODO APP", () => {
+  test("1 Confirm Add button is dissabled", async () => {
     render(<App />);
     const completeTodo = jest.fn();
     const removeTodo = jest.fn();
@@ -24,12 +24,24 @@ describe("APP function TODOITEMS", () => {
         removeTodo={removeTodo}
       />
     );
-    const completeBtn = screen.getAllByText("Complete 0")[1];
-    const removeBtn = screen.getAllByText("Delete")[0];
+    /*const completeBtn = screen.getByRole("button", { name: /completebtn_0/i });
+    const removeBtn = screen.getByRole("button", { name: /deletebtn_0/i });
 
-    await userEvent.click(completeBtn);
+    userEvent.click(completeBtn);
     await userEvent.click(removeBtn);
-
-    expect(removeTodo.mock.calls).toEqual([]);
+    */
+    expect(
+      screen.getByRole("button", {
+        name: /add/i,
+      })
+    ).toBeDisabled();
   });
+
+  test('2.Confirm delete button is removing', ()=> {
+
+      const delBtn = screen.getByRole('button', {  name: /deletebtn_0_create the todo app/i})
+      
+      userEvent.click(delBtn)
+  })
+  
 });

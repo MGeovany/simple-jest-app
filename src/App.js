@@ -14,10 +14,18 @@ export function TodoItems({ index, task, complete_task, remove_todo }) {
                 {tk.task}
               </li>
               <div className="btns">
-                <button className="add" onClick={() => complete_task(index)}>
-                  Complete {index}
+                <button
+                  className="complete"
+                  aria-label={`completeBtn_${index}_${tk.task}`}
+                  onClick={() => complete_task(index)}
+                >
+                  Complete
                 </button>
-                <button className="delete" onClick={() => remove_todo(index)}>
+                <button
+                  className="delete"
+                  aria-label={`deleteBtn_${index}_${tk.task}`}
+                  onClick={() => remove_todo(index)}
+                >
                   Delete
                 </button>
               </div>
@@ -61,6 +69,7 @@ function App() {
   };
 
   const [value, setValue] = useState("");
+  const [flag, setFlag] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,10 +77,15 @@ function App() {
     if (!value) return;
     add_item(value);
     setValue("");
+    setFlag(true);
   };
 
   const handleOnChange = (e) => {
-    console.log("value", e.target.value, "value", value);
+    setFlag(false);
+    if (!e.target.value) {
+      setFlag(true);
+    }
+
     setValue(e.target.value);
   };
 
@@ -86,7 +100,9 @@ function App() {
           onChange={handleOnChange}
           value={value}
         ></input>
-        <button className="add__task">Add</button>
+        <button className="add__task" disabled={flag}>
+          Add
+        </button>
         <TodoItems
           task={tasks}
           setTask={setTask}

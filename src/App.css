@@ -20,6 +20,13 @@
   border-radius: 5px;
 }
 
+.add__task:disabled {
+  background: inherit;
+}
+
+.add__task:hover:disabled {
+  background: #dfe1e6;
+}
 h1 {
   color: white;
 }
